@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/gorilla/mux"
 	// "flag"
  //  "io/ioutil"
   // "log"
@@ -22,11 +23,11 @@ func main() {
 	db.Start()
 	fmt.Println("Database up and running")
 
-	// database := db.GetDB()
-	// patient := models.Patient{Name: "Jake", Email: "jake.dluhy@gmail.com", Age: 22}
-	// database.Create(&patient)
+	rtr := mux.NewRouter()
+	rtr.HandleFunc("/", controllers.RootHandler)
+	rtr.HandleFunc("/patients", controllers.PatientsIndexHandler)
+	rtr.HandleFunc("/patients/{id:[0-9]+}", controllers.PatientsShowHandler)
 
-	http.HandleFunc("/", controllers.RootHandler)
-	http.HandleFunc("/patients", controllers.PatientsIndexHandler)
+	http.Handle("/", rtr)
 	http.ListenAndServe(":8080", nil)
 }

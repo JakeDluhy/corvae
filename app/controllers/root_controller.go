@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-var templates = template.Must(template.ParseFiles(filepath.Join("views/home","index.html")))
+var templates = template.Must(template.ParseFiles(filepath.Join("assets","index.html")))
 
 func RootHandler(res http.ResponseWriter, req *http.Request) {
 	err := templates.ExecuteTemplate(res, "index.html", nil)
