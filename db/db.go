@@ -20,7 +20,10 @@ func Start() {
 	// Auto Migrate all models
 	db.AutoMigrate(
 		&models.Patient{},
-		&models.Ecg{},
+		&models.Doctor{},
+		&models.NurseStation{},
+		&models.EcgStream{},
+		&models.EcgPiece{},
 	)
 }
 

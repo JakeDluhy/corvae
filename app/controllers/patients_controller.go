@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 	"github.com/gorilla/mux"
-	// "fmt"
+	"fmt"
+	"reflect"
 	"corvae/app/models"
 	"corvae/db"
 )
@@ -30,6 +31,8 @@ func PatientsShowHandler(res http.ResponseWriter, req *http.Request) {
 	patient := database.Find(&models.Patient{}, id)
 
 	js, err := json.Marshal(patient)
+	fmt.Println(reflect.TypeOf(js))
+	fmt.Println(js)
   if err != nil {
     http.Error(res, err.Error(), http.StatusInternalServerError)
     return

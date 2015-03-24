@@ -23,10 +23,26 @@ func main() {
 	db.Start()
 	fmt.Println("Database up and running")
 
+	// database := db.GetDB()
+	// pat := models.Patient{}
+	// database.Find(&pat, 2)
+	// fmt.Println(pat.LoginPatient("fooba"))
+
 	rtr := mux.NewRouter()
+	// Root
 	rtr.HandleFunc("/", controllers.RootHandler)
+
+	// Patients
 	rtr.HandleFunc("/patients", controllers.PatientsIndexHandler)
 	rtr.HandleFunc("/patients/{id:[0-9]+}", controllers.PatientsShowHandler)
+
+	// Doctors
+	rtr.HandleFunc("/doctors", controllers.DoctorsIndexHandler)
+	rtr.HandleFunc("/doctors/{id:[0-9]+}", controllers.DoctorsShowHandler)
+
+	// Nurse Station
+	rtr.HandleFunc("/nurse_stations", controllers.NurseStationsIndexHandler)
+	rtr.HandleFunc("/nurse_stations/{id:[0-9]+}", controllers.NurseStationsShowHandler)
 
 	http.Handle("/", rtr)
 	http.ListenAndServe(":8080", nil)
